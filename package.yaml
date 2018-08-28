@@ -1,10 +1,10 @@
 name:                dpghs
 version:             0.1.0.0
-github:              "githubuser/dpghs"
+github:              "githubuser/MaciekTalaska"
 license:             BSD3
-author:              "Author name here"
-maintainer:          "example@example.com"
-copyright:           "2018 Author name here"
+author:              "Maciek Talaska"
+maintainer:          "maciektalaska@noreply.com"
+copyright:           "2018 Maciek Talaska"
 
 extra-source-files:
 - README.md
