@@ -9,12 +9,15 @@ findIndexToSplit p line = fromMaybe (-1) (findIndex p line) +1
 
 extract :: [Char] -> [Char]
 extract line = snd (splitAt (findIndexToSplit (=='\t') line) line)
--- extract line = snd (splitAt ((fromMaybe (-1) (findIndex (=='\t') line )) + 1) line)
+
+createRepository :: [[Char]] -> [[Char]]
+createRepository ls = map extract ls
  
 main :: IO ()
 main = do
   contents <- readFile "diceware-en.txt"
   let ls = lines contents
-  let first_word = extract (head ls)
-  print "first word: "
-  print first_word 
+  -- let first_word = extract (head ls)
+  let ws = createRepository ls
+  print "first 10 words: "
+  print (take 10 ws)
