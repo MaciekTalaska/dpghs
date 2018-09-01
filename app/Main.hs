@@ -20,6 +20,11 @@ getRandomIndex list = randomRIO (0, (length list))
 getRandomElement :: [b] -> IO b
 getRandomElement list = (getRandomIndex list) >>= \x -> return $ list !! x
 
+getRandomElement2 :: [b] -> IO b
+getRandomElement2 list = do
+  index <- (getRandomIndex list)
+  return (list !! index)
+
 main :: IO ()
 main = do
   contents <- readFile "diceware-en.txt"
@@ -28,3 +33,6 @@ main = do
   word <- getRandomElement ws
   print "random word: "
   print word
+  word2 <- getRandomElement2 ws 
+  print "random word2: "
+  print word2
