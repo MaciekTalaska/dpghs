@@ -14,8 +14,11 @@ extract line = snd (splitAt (findIndexToSplit (=='\t') line) line)
 createRepository :: [[Char]] -> [[Char]]
 createRepository ls = map extract ls
 
+getRandomIndex :: Foldable t => t a -> IO Int
+getRandomIndex list = randomRIO (0, (length list))
+
 getRandomElement :: [b] -> IO b
-getRandomElement ls = (randomRIO (0, length ls)) >>= \x -> return $ ls !! x
+getRandomElement list = (getRandomIndex list) >>= \x -> return $ list !! x
 
 main :: IO ()
 main = do
