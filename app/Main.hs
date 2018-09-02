@@ -8,11 +8,17 @@ import System.Random
 findIndexToSplit :: (a -> Bool) -> [a] -> Int
 findIndexToSplit p line = fromMaybe (-1) (findIndex p line) +1
 
-extract :: [Char] -> [Char]
-extract line = snd (splitAt (findIndexToSplit (=='\t') line) line)
+extractWordWs :: [Char] -> [Char]
+extractWordWs line = snd (splitAt (findIndexToSplit (=='\t') line) line)
 
-createRepository :: [[Char]] -> [[Char]]
-createRepository ls = map extract ls
+extractAllWords :: [[Char]] -> [[Char]]
+extractAllWords ls = map extractWordWs ls
+
+createRepository :: FilePath -> IO [[Char]]
+createRepository filename = do
+  contents <- readFile filename
+  let ls = lines contents
+  return (extractAllWords ls)
 
 getRandomIndex :: Foldable t => t a -> IO Int
 getRandomIndex list = randomRIO (0, (length list))
@@ -25,6 +31,11 @@ getRandomElement2 list = do
   index <- (getRandomIndex list)
   return (list !! index)
 
+generatePassword :: (Num a, Enum a) => a -> [b] -> IO [b]
+generatePassword size wlist = do
+  password <- mapM (\_ -> getRandomElement wlist) [1..size]
+  return password
+
 printMessageAndValue :: (Show a1, Show a2) => a1 -> a2 -> IO ()
 printMessageAndValue title password = do
   print title
@@ -32,11 +43,7 @@ printMessageAndValue title password = do
 
 main :: IO ()
 main = do
-  contents <- readFile "diceware-en.txt"
-  let ls = lines contents
-  let ws = createRepository ls
-  password <- mapM (\_ -> getRandomElement ws) [1..5]
-  printMessageAndValue "password generated using mapM & getRandomElement: " password
-  password2 <- mapM (\_ -> getRandomElement2 ws) [1..5]
-  printMessageAndValue "password generated using mapM & getRandomElement2: " password2
+  ws <- createRepository "diceware-en.txt"
+  password <- generatePassword 5 ws
+  printMessageAndValue "generated password: " password
 
