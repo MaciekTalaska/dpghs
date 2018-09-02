@@ -34,10 +34,6 @@ main = do
   contents <- readFile "diceware-en.txt"
   let ls = lines contents
   let ws = createRepository ls
-  --word <- getRandomElement ws
-  --printMessageAndValue "random word: " word
-  --word2 <- getRandomElement2 ws 
-  --printMessageAndValue "second word: " word2
   password <- mapM (\_ -> getRandomElement ws) [1..5]
   printMessageAndValue "password generated using mapM & getRandomElement: " password
   password2 <- mapM (\_ -> getRandomElement2 ws) [1..5]
