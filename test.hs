@@ -4,10 +4,15 @@ import System.Random
 
 findIndexToSplit p line = fromMaybe (-1) (findIndex p line) +1
 
-extract line = snd (splitAt (findIndexToSplit (=='\t') line) line)
--- extract line = snd (splitAt ((fromMaybe (-1) (findIndex (=='\t') line )) + 1) line)
+extractWordWs line = snd (splitAt (findIndexToSplit (=='\t') line) line)
+-- extractWordWs line = snd (splitAt ((fromMaybe (-1) (findIndex (=='\t') line )) + 1) line)
 
-createRepository ls = map extract ls
+extractAllWords ls = map extractWordWs ls
+
+createRepository filename = do
+  contents <- readFile filename
+  let ls = lines contents
+  return (extractAllWords ls)
 
 getRandomIndex list = randomRIO (0, (length list))
 getRandomElement list = (getRandomIndex list) >>= \x -> return $ list !! x
@@ -27,4 +32,8 @@ getRandomE list = do
 printMessageAndValue title password = do
   print title
   print password
+
+generatePassword size wlist = do
+  password <- mapM (\_ -> getRandomElement wlist) [1..size]
+  return password
 
