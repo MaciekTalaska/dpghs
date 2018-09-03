@@ -12,17 +12,21 @@ Diceware method is described in details by its author - Arnold G. Reinhold: http
 
 ## Usage
 
+This project has been created using `stack` tool for Haskell (https://docs.haskellstack.org/en/stable/README/).
+
+`stack repl` launches ghci with all code from the sources loaded
+
+`stack build` builds executable (it will be placed under `.stack-work/install` directory)
 
 ## Diceware lists
 
-Dpg requires list of words to be used (diceware word list). At the moment the application has two lists built in: one containg words in English (default) and other list containing words in Polish (it has to be explicity specified). 
+`Dpghs` requires list of words to be used (diceware word list). At the moment the application has two lists built in: one containg words in English (default) and other list containing words in Polish (it has to be explicity specified). 
 
 List of english words has been taken from FFI website: https://www.eff.org/deeplinks/2016/07/new-wordlists-random-passphrases
 List of Polish words has been created by me (https://github.com/MaciekTalaska/diceware-pl) - this work is based on the list created originally by Piotr (DrFugazi) Tarnowski.
 
 
 [Mathias Gumz's repository](https://github.com/mgumz/diceware/tree/master/lists) contains diceware lists for different languages.
-
 
 ## Licenses 
 
