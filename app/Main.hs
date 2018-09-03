@@ -4,12 +4,13 @@ import Lib
 import Data.List
 import Data.Maybe
 import System.Random
+import Data.Char
 
 findIndexToSplit :: (a -> Bool) -> [a] -> Int
 findIndexToSplit p line = fromMaybe (-1) (findIndex p line) +1
 
 extractWordWs :: [Char] -> [Char]
-extractWordWs line = snd (splitAt (findIndexToSplit (=='\t') line) line)
+extractWordWs line = snd (splitAt (findIndexToSplit (isSpace) line) line)
 
 extractAllWords :: [[Char]] -> [[Char]]
 extractAllWords ls = map extractWordWs ls
@@ -46,4 +47,12 @@ main = do
   ws <- createRepository "diceware-en.txt"
   password <- generatePassword 5 ws
   printMessageAndValue "generated password: " password
-
+  diceware_pl <- createRepository "diceware-pl.txt"
+  diceware_fi <- createRepository "diceware-fi.txt"
+  diceware_mi <- createRepository "diceware-mi.txt"
+  password_pl <- generatePassword 5 diceware_pl
+  password_fi <- generatePassword 5 diceware_fi
+  password_mi <- generatePassword 5 diceware_mi
+  printMessageAndValue "password in Polish: " password_pl
+  printMessageAndValue "password in Finnish: " password_fi
+  printMessageAndValue "password in Maori: " password_mi

@@ -1,10 +1,12 @@
 import Data.List
 import Data.Maybe
 import System.Random
+import Data.Char
 
 findIndexToSplit p line = fromMaybe (-1) (findIndex p line) +1
 
-extractWordWs line = snd (splitAt (findIndexToSplit (=='\t') line) line)
+extractWordWs line = snd (splitAt (findIndexToSplit (isSpace) line) line)
+-- extractWordWs line = snd (splitAt (findIndexToSplit (=='\t') line) line)
 -- extractWordWs line = snd (splitAt ((fromMaybe (-1) (findIndex (=='\t') line )) + 1) line)
 
 extractAllWords ls = map extractWordWs ls
