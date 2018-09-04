@@ -1,25 +1,10 @@
 module Main where
 
 import Lib
-import Data.List
-import Data.Maybe
+--import Data.List
+--import Data.Maybe
 import System.Random
-import Data.Char
-
-findIndexToSplit :: (a -> Bool) -> [a] -> Int
-findIndexToSplit p line = fromMaybe (-1) (findIndex p line) +1
-
-extractWordWs :: [Char] -> [Char]
-extractWordWs line = snd (splitAt (findIndexToSplit (isSpace) line) line)
-
-extractAllWords :: [[Char]] -> [[Char]]
-extractAllWords ls = map extractWordWs ls
-
-createRepository :: FilePath -> IO [[Char]]
-createRepository filename = do
-  contents <- readFile filename
-  let ls = lines contents
-  return (extractAllWords ls)
+--import Data.Char
 
 getRandomIndex :: Foldable t => t a -> IO Int
 getRandomIndex list = randomRIO (0, (length list))
