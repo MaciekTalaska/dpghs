@@ -39,3 +39,7 @@ generatePassword size wlist = do
   password <- mapM (\_ -> getRandomElement wlist) [1..size]
   return password
 
+printPassword filename passwordLength = do
+  ws <- createRepository filename
+  password <- generatePassword passwordLength ws
+  printMessageAndValue "generated password: " password

@@ -42,17 +42,15 @@ printMessageAndValue title password = do
   print title
   print password
 
+printPassword :: (Num a, Enum a) => FilePath -> a -> IO ()
+printPassword filename passwordLength = do
+  ws <- createRepository filename
+  password <- generatePassword passwordLength ws
+  printMessageAndValue "generated password: " password
+
 main :: IO ()
 main = do
-  ws <- createRepository "diceware-en.txt"
-  password <- generatePassword 5 ws
-  printMessageAndValue "generated password: " password
-  diceware_pl <- createRepository "diceware-pl.txt"
-  diceware_fi <- createRepository "diceware-fi.txt"
-  diceware_mi <- createRepository "diceware-mi.txt"
-  password_pl <- generatePassword 5 diceware_pl
-  password_fi <- generatePassword 5 diceware_fi
-  password_mi <- generatePassword 5 diceware_mi
-  printMessageAndValue "password in Polish: " password_pl
-  printMessageAndValue "password in Finnish: " password_fi
-  printMessageAndValue "password in Maori: " password_mi
+  printPassword "diceware-en.txt" 5
+  printPassword "diceware-pl.txt" 5
+  printPassword "diceware-fi.txt" 5
+  printPassword "diceware-mi.txt" 5
