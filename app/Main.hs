@@ -1,10 +1,7 @@
 module Main where
 
-import Lib
---import Data.List
---import Data.Maybe
+import Repository
 import System.Random
---import Data.Char
 
 getRandomIndex :: Foldable t => t a -> IO Int
 getRandomIndex list = randomRIO (0, (length list))

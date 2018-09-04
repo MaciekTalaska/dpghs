@@ -1,4 +1,4 @@
-module Lib
+module Repository
     ( someFunc,
       findIndexToSplit,
       extractWordWs,
