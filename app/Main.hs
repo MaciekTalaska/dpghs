@@ -1,24 +1,15 @@
 module Main where
 
 import Repository
-import System.Random
+import Crypto
 
-getRandomIndex :: Foldable t => t a -> IO Int
-getRandomIndex list = randomRIO (0, (length list))
-
-getRandomElement :: [b] -> IO b
-getRandomElement list = (getRandomIndex list) >>= \x -> return $ list !! x
-
-getRandomElement2 :: [b] -> IO b
-getRandomElement2 list = do
-  index <- (getRandomIndex list)
-  return (list !! index)
-
+-- Passwords
 generatePassword :: (Num a, Enum a) => a -> [b] -> IO [b]
 generatePassword size wlist = do
   password <- mapM (\_ -> getRandomElement wlist) [1..size]
   return password
 
+-- Utils?
 printMessageAndValue :: (Show a1, Show a2) => a1 -> a2 -> IO ()
 printMessageAndValue title password = do
   print title
