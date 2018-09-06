@@ -7,6 +7,7 @@ module Utils
 
 import Repository
 import Passwords
+import Data.List
 
 printMessageAndValue :: (Show a1, Show a2) => a1 -> a2 -> IO ()
 printMessageAndValue title password = do
@@ -30,4 +31,4 @@ createPasswordAsStringFromDicewareList2 :: (Num a, Enum a) => FilePath -> a -> I
 createPasswordAsStringFromDicewareList2 filename size = do
   ws <- createRepository filename
   password <- generatePassword size ws
-  return (unwords password)
+  return (intercalate "-" password)
