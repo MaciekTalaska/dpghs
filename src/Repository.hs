@@ -1,17 +1,16 @@
 module Repository
-    ( someFunc,
-      findIndexToSplit,
+    ( findIndexToSplit,
       extractWordWs,
       extractAllWords,
-      createRepository
+      createRepository,
+      isDicewareFile,
+      getDicewareFiles
     ) where
 
 import Data.List
 import Data.Maybe
 import Data.Char
-
-someFunc :: IO ()
-someFunc = putStrLn "someFunc"
+import System.Directory
 
 findIndexToSplit :: (a -> Bool) -> [a] -> Int
 findIndexToSplit p line = fromMaybe (-1) (findIndex p line) +1
@@ -27,3 +26,12 @@ createRepository filename = do
   contents <- readFile filename
   let ls = lines contents
   return (extractAllWords ls)
+
+isDicewareFile :: [Char] -> Bool
+isDicewareFile filename = (isPrefixOf "diceware-" filename) && (isSuffixOf ".txt" filename)
+
+getDicewareFiles :: IO [[Char]]
+getDicewareFiles = do
+  all_files <- getDirectoryContents "."
+  let diceware_files = (filter (\x -> isDicewareFile x) all_files)
+  return diceware_files
