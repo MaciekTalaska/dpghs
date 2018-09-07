@@ -1,7 +1,7 @@
 module Main where
 
-import Utils
 import Repository
+import Passwords
 
 main :: IO ()
 main = do
