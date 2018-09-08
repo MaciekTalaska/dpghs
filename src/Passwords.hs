@@ -1,6 +1,5 @@
 module Passwords
-  ( generatePassword,
-    printPassword,
+  ( printPassword,
     createPasswordFromFilename,
     createPasswordAsStringFromFilename
   ) where
