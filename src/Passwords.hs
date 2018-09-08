@@ -1,8 +1,8 @@
 module Passwords
   ( generatePassword,
     printPassword,
-    createPasswordFromDicewareList,
-    createPasswordAsStringFromDicewareList2
+    createPasswordFromFilename,
+    createPasswordAsStringFromFilename
   ) where
 
 import Crypto
@@ -21,15 +21,15 @@ printPassword filename passwordLength = do
   password <- generatePassword passwordLength ws
   printMessageAndValue "generated password: " password
 
-createPasswordFromDicewareList :: (Num a, Enum a) => FilePath -> a -> IO [[Char]]
-createPasswordFromDicewareList filename size = do
+createPasswordFromFilename :: (Num a, Enum a) => FilePath -> a -> IO [[Char]]
+createPasswordFromFilename filename size = do
   ws <- createRepository filename
   password <- generatePassword size ws
   return password
 
 
-createPasswordAsStringFromDicewareList2 :: (Num a, Enum a) => FilePath -> a -> IO [Char]
-createPasswordAsStringFromDicewareList2 filename size = do
+createPasswordAsStringFromFilename :: (Num a, Enum a) => FilePath -> a -> IO [Char]
+createPasswordAsStringFromFilename filename size = do
   ws <- createRepository filename
   password <- generatePassword size ws
   return (intercalate "-" password)

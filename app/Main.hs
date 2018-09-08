@@ -22,7 +22,7 @@ processForPasswords language passwordLength passwordsCount = do
   --print ("language: " ++ language)
   --print ("password length: " ++ passwordLength)
   --print ("password count: " ++ passwordsCount)
-  password <- createPasswordAsStringFromDicewareList2 ("diceware-"++language++".txt") (read passwordLength :: Integer)
+  password <- createPasswordAsStringFromFilename ("diceware-"++language++".txt") (read passwordLength :: Integer)
   print password
 
 main :: IO ()
