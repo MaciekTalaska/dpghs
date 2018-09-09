@@ -1,6 +1,5 @@
 module Main where
 
-import Repository
 import Passwords
 import System.Environment
 import System.Exit
@@ -16,19 +15,6 @@ exit    = exitWith ExitSuccess
 
 exitFail :: IO a
 exitFail = exitWith (ExitFailure 1)
-
-createSinglePassword :: [Char] -> String -> IO [Char]
-createSinglePassword language passwordLength = do
-  let wordCount = (read passwordLength :: Integer)
-  let filename = "diceware-" ++ language ++ ".txt"
-  password <- createPasswordAsStringFromFilename filename wordCount
-  return password
-
-createAllPasswords :: [Char] -> String -> String -> IO ()
-createAllPasswords language passwordLength passwordsCount = do
-  let count = (read passwordsCount :: Integer)
-  passwords <- mapM (\_ -> createSinglePassword language passwordLength) [1..count]
-  print passwords
 
 main :: IO ()
 main = do
