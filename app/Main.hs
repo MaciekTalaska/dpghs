@@ -5,7 +5,7 @@ import System.Environment
 import System.Exit
 
 usage :: IO ()
-usage   = putStrLn "Usage: dpghs -m <language> -w <password length> -p <passwords_count>"
+usage   = putStrLn "Usage: dpghs -l language -w password_length_in_words -p numbers_of_password_to_generate"
 
 version :: IO ()
 version = putStrLn "dpghs 0.1"
