@@ -18,6 +18,16 @@ This project has been created using `stack` tool for Haskell (https://docs.haske
 
 `stack build` builds executable (it will be placed under `.stack-work/install` directory)
 
+### Options
+
+`Dpghs` supports following options:
+- `-l language` - specifies which language list to use to generate password. Please note that language file has to exist, and should be named in a following manner: "diceware-xy.txt" where xy is two letter code of the language (de for German, en for English, pl for Polish etc.)
+- `w words` (password length) - how long (in words) generated password should be
+- `p password count` - how many passwords to generate
+
+Example of Usage:
+`dpghs -l pl -w 6 -p 3` - generate 3 passwords, each consisting of 6 words. Words will be taken from diceware list for Polish language.
+
 ## Diceware lists
 
 `Dpghs` requires list of words to be used (diceware word list). At the moment the application has two lists built in: one containg words in English (default) and other list containing words in Polish (it has to be explicity specified). 
