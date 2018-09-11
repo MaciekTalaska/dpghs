@@ -1,5 +1,5 @@
 module Passwords
-  ( printPassword,
+  (
     createPasswordFromFilename,
     createPasswordAsStringFromFilename,
     createSinglePassword,
@@ -20,12 +20,6 @@ generatePasswordSeparated :: (Num a1, Enum a1) => a1 -> [[a2]] -> [a2] -> IO [a2
 generatePasswordSeparated size wlist separator = do
   password <- generatePassword size wlist
   return (intercalate separator password)
-
-printPassword :: (Num a, Enum a) => FilePath -> a -> IO ()
-printPassword filename passwordLength = do
-  ws <- createRepository filename
-  password <- generatePassword passwordLength ws
-  printMessageAndValue "generated password: " password
 
 createPasswordFromFilename :: (Num a, Enum a) => FilePath -> a -> IO [[Char]]
 createPasswordFromFilename filename size = do
