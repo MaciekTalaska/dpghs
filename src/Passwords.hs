@@ -16,6 +16,11 @@ generatePassword size wlist = do
   password <- mapM (\_ -> getRandomElement wlist) [1..size]
   return password
 
+generatePasswordSeparated :: (Num a1, Enum a1) => a1 -> [[a2]] -> [a2] -> IO [a2]
+generatePasswordSeparated size wlist separator = do
+  password <- generatePassword size wlist
+  return (intercalate separator password)
+
 printPassword :: (Num a, Enum a) => FilePath -> a -> IO ()
 printPassword filename passwordLength = do
   ws <- createRepository filename
@@ -41,8 +46,16 @@ createSinglePassword language passwordLength = do
   password <- createPasswordAsStringFromFilename filename wordCount
   return password
 
+createAllPasswordsOld :: [Char] -> String -> String -> IO ()
+createAllPasswordsOld language passwordLength passwordsCount = do
+  let count = (read passwordsCount :: Integer)
+  passwords <- mapM (\_ -> createSinglePassword language passwordLength) [1..count]
+  print passwords
+
 createAllPasswords :: [Char] -> String -> String -> IO ()
 createAllPasswords language passwordLength passwordsCount = do
   let count = (read passwordsCount :: Integer)
-  passwords <- mapM (\_ -> createSinglePassword language passwordLength) [1..count]
+  ws <- createRepository ("diceware-"++language++".txt")
+  let size = (read passwordLength :: Integer)
+  passwords <- mapM (\_ -> generatePasswordSeparated size ws "-") [1..count]
   print passwords
