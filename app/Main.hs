@@ -22,12 +22,12 @@ main = do
   case args of
     ["-v"] -> version >> exit
     ["-h"] -> usage >> exit
-    ["-l", l, "-w", w, "-p", p] -> createAllPasswords l w p
-    ["-l", l, "-p", p, "-w", w] -> createAllPasswords l w p
-    ["-w", w, "-l", l, "-p", p] -> createAllPasswords l w p
-    ["-w", w, "-p", p, "-l", l] -> createAllPasswords l w p
-    ["-p", p, "-l", l, "-w", w] -> createAllPasswords l w p
-    ["-p", p, "-w", w, "-l", l] -> createAllPasswords l w p
+    ["-l", l, "-w", w, "-p", p] -> createPasswords l w p
+    ["-l", l, "-p", p, "-w", w] -> createPasswords l w p
+    ["-w", w, "-l", l, "-p", p] -> createPasswords l w p
+    ["-w", w, "-p", p, "-l", l] -> createPasswords l w p
+    ["-p", p, "-l", l, "-w", w] -> createPasswords l w p
+    ["-p", p, "-w", w, "-l", l] -> createPasswords l w p
     otherwise -> do
       putStrLn "error! type: 'dpghs -h' for help"
       exitFail

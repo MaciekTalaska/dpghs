@@ -1,6 +1,6 @@
 module Passwords
   (
-    createAllPasswords
+    createPasswords
   ) where
 
 import Crypto
@@ -18,8 +18,8 @@ generatePasswordSeparated size wlist separator = do
   password <- generatePassword size wlist
   return (intercalate separator password)
 
-createAllPasswords :: [Char] -> String -> String -> IO ()
-createAllPasswords language passwordLength passwordsCount = do
+createPasswords :: [Char] -> String -> String -> IO ()
+createPasswords language passwordLength passwordsCount = do
   let count = (read passwordsCount :: Integer)
   ws <- createRepository ("diceware-"++language++".txt")
   let size = (read passwordLength :: Integer)
