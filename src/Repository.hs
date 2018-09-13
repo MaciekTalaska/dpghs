@@ -1,9 +1,7 @@
 module Repository
-    ( findIndexToSplit,
-      extractWordWs,
+    ( extractWordWs,
       extractAllWords,
       createRepository,
-      isDicewareFile,
       getDicewareFiles
     ) where
 
@@ -27,6 +25,7 @@ createRepository filename = do
   let ls = lines contents
   return (extractAllWords ls)
 
+-- TODO: regex here should be better idea
 isDicewareFile :: [Char] -> Bool
 isDicewareFile filename = (isPrefixOf "diceware-" filename) && (isSuffixOf ".txt" filename)
 

@@ -6,7 +6,6 @@ module Passwords
 import Crypto
 import Repository
 import Data.List
-import Utils
 
 generatePassword :: (Num a, Enum a) => a -> [b] -> IO [b]
 generatePassword size wlist = do
