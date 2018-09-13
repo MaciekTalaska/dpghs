@@ -25,8 +25,11 @@ This project has been created using `stack` tool for Haskell (https://docs.haske
 - `w words` (password length) - how long (in words) generated password should be
 - `p password count` - how many passwords to generate
 
-Example of Usage:
-`dpghs -l pl -w 6 -p 3` - generate 3 passwords, each consisting of 6 words. Words will be taken from diceware list for Polish language.
+Example of usage:
+
+`dpghs -l pl -w 6 -p 3`  - generates 3 passwords, each containing 6 wors. Polish diceware list is used as source of words.
+
+`dpghs -w 5 -l en -p 1` - generates single password consisting of 5 words. English diceware list is used as source of words.
 
 ## Diceware lists
 
